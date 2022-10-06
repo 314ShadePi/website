@@ -1,0 +1,10 @@
+[build]
+public_url = "/"
+release = true
+
+[serve]
+address = "127.0.0.1"
+port = 1616
+
+[clean]
+cargo = true
