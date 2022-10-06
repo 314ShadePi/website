@@ -1,0 +1,9 @@
+[tasks.dev]
+workspace = false
+dependencies = ["build-frontend"]
+command = "cargo"
+args = ["run", "-p", "backend"]
+
+[tasks.build-frontend]
+env = {CARGO_MAKE_WORKSPACE_INCLUDE_MEMBERS = ["frontend"]}
+run_task = { name = "build", fork = true }
