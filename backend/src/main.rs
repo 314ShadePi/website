@@ -17,6 +17,8 @@ async fn main() -> std::io::Result<()> {
         .parse()
         .unwrap_or(8080);
 
+    println!("http://{}:{}", addr, port);
+
     let front_service =
         move || actix_files::Files::new("/", dist_dir.clone()).index_file("index.html");
 
