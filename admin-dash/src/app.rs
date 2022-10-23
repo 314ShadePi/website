@@ -52,7 +52,7 @@ impl eframe::App for TemplateApp {
         // Tip: a good default choice is to just keep the `CentralPanel`.
         // For inspiration and more examples, go to https://emilk.github.io/egui
 
-        #[cfg(not(target_arch = "wasm32"))] // no File->Quit on web pages!
+        /*#[cfg(not(target_arch = "wasm32"))] // no File->Quit on web pages!
         egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
             // The top panel is often a good place for a menu bar:
             egui::menu::bar(ui, |ui| {
@@ -62,7 +62,7 @@ impl eframe::App for TemplateApp {
                     }
                 });
             });
-        });
+        });*/
 
         egui::SidePanel::left("side_panel").show(ctx, |ui| {
             ui.heading("Side Panel");
@@ -74,13 +74,24 @@ impl eframe::App for TemplateApp {
 
             ui.add(egui::Slider::new(value, 0.0..=10.0).text("value"));
             if ui.button("Increment").clicked() {
-                *value += 1.0;
+                if *value == 10.00 {
+                    *value = *value
+                } else {
+                    *value += 1.0;
+                }
+            }
+            if ui.button("Decrement").clicked() {
+                if *value == 0.00 {
+                    *value = *value
+                } else {
+                    *value -= 1.0;
+                }
             }
 
             ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
                 ui.horizontal(|ui| {
                     ui.spacing_mut().item_spacing.x = 0.0;
-                    ui.label("powered by ");
+                    ui.label("powered by");
                     ui.hyperlink_to("egui", "https://github.com/emilk/egui");
                     ui.label(" and ");
                     ui.hyperlink_to(
@@ -95,10 +106,10 @@ impl eframe::App for TemplateApp {
         egui::CentralPanel::default().show(ctx, |ui| {
             // The central panel the region left after adding TopPanel's and SidePanel's
 
-            ui.heading("eframe template");
-            ui.hyperlink("https://github.com/emilk/eframe_template");
+            ui.heading("Admin Dashboard");
+            ui.hyperlink("https://github.com/314ShadePi/website");
             ui.add(egui::github_link_file!(
-                "https://github.com/emilk/eframe_template/blob/master/",
+                "https://github.com/314ShadePi/website/blob/master/admin-dash/",
                 "Source code."
             ));
             egui::warn_if_debug_build(ui);
