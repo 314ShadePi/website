@@ -1,3 +1,0 @@
-# Website
-
-Run: `./dev.sh`
