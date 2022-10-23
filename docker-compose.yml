@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    container_name: website
+    volumes:
+      - ./src:/src
+    ports:
+      - "8080:8080"
+    working_dir: /src
+    command: trunk serve --port 8080 --address 0.0.0.0
+  surreal:
+    image: surrealdb/surrealdb:latest
+    ports:
+      - "8000:8000"
+    command: start --log debug --user root --pass root
