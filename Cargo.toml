@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "admin-dash",
+    "backend",
+    "frontend",
+    "common"
+]

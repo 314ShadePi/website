@@ -1,16 +1,39 @@
 version: "3.9"
 services:
-  web:
-    build: .
-    container_name: website
+  frontend:
+    build: ./frontend
+    container_name: website-frontend
     volumes:
-      - ./src:/src
+      - ./frontend:/src/frontend
+      - ./common:/src/common
+    ports:
+      - "80:80"
+    working_dir: /src/frontend
+    command: trunk serve --port 80 --address 0.0.0.0
+  backend:
+    build: ./backend
+    container_name: website-backend
+    volumes:
+      - ./backend:/src/backend
+      - ./common:/src/common
     ports:
       - "8080:8080"
-    working_dir: /src
-    command: trunk serve --port 8080 --address 0.0.0.0
+    working_dir: /src/backend
+    command: cargo watch -x run
+  admin-dash:
+    build: ./admin-dash
+    container_name: website-admin-dash
+    volumes:
+      - ./admin-dash:/src/admin-dash
+      - ./common:/src/common
+    ports:
+      - "12341:12341"
+    working_dir: /src/admin-dash
+    command: trunk serve --port 12341 --address 0.0.0.0
   surreal:
     image: surrealdb/surrealdb:latest
+    container_name: website-surrealdb
     ports:
       - "8000:8000"
-    command: start --log debug --user root --pass root
+    working_dir: /314/surreal
+    command: start --log debug --user root --pass root file://./surrealdb
