@@ -7,13 +7,13 @@ services:
       - ./frontend:/src/frontend
       - ./common:/src/common
     ports:
-      - "80:80"
+      - "8080:8080"
     depends_on:
       - backend-dev
     profiles:
       - dev
     working_dir: /src/frontend
-    command: trunk serve --port 80 --address 0.0.0.0
+    command: trunk serve --port 8080 --address 0.0.0.0
   admin-dash-dev:
     build: ./dockerfiles/dev/admin-dash
     container_name: website-admin-dash-dev
@@ -33,9 +33,11 @@ services:
     container_name: website-backend-dev
     volumes:
       - ./backend:/src/backend
+      - ./frontend:/src/frontend
+      - ./admin-dash:/src/admin-dash
       - ./common:/src/common
     ports:
-      - "8080:8080"
+      - "80:80"
     depends_on:
       - surreal
     profiles:
