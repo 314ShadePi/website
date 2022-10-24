@@ -45,12 +45,14 @@ services:
   surreal:
     image: surrealdb/surrealdb:latest
     container_name: website-surrealdb
+    volumes:
+      - ./surreal:/314/surreal
     ports:
       - "8000:8000"
     profiles:
       - dev
     working_dir: /314/surreal
-    command: start --log debug --user root --pass root file://./surrealdb
+    command: start --log debug --user root --pass root file://./surreal.db
   frontend-build:
     build: ./dockerfiles/build/frontend
     container_name: website-frontend-build
