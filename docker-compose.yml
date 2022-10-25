@@ -1,0 +1,103 @@
+version: "3.9"
+services:
+  deploy:
+    build: .
+    container_name: website-deploy
+    ports:
+      - "80:80"
+    depends_on:
+      - surreal
+    profiles:
+      - deploy
+  frontend-dev:
+    build: ./dockerfiles/dev/frontend
+    container_name: website-frontend-dev
+    volumes:
+      - ./frontend:/src/frontend
+      - ./common:/src/common
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend-dev
+    profiles:
+      - dev
+    working_dir: /src/frontend
+    command: trunk serve --port 8080 --address 0.0.0.0
+  admin-dash-dev:
+    build: ./dockerfiles/dev/admin-dash
+    container_name: website-admin-dash-dev
+    volumes:
+      - ./admin-dash:/src/admin-dash
+      - ./common:/src/common
+    ports:
+      - "12341:12341"
+    depends_on:
+      - backend-dev
+    profiles:
+      - dev
+    working_dir: /src/admin-dash
+    command: trunk serve --port 12341 --address 0.0.0.0
+  backend-dev:
+    build: ./dockerfiles/dev/backend
+    container_name: website-backend-dev
+    volumes:
+      - ./backend:/src/backend
+      - ./frontend:/src/frontend
+      - ./admin-dash:/src/admin-dash
+      - ./common:/src/common
+    ports:
+      - "80:80"
+    depends_on:
+      - surreal
+    profiles:
+      - dev
+    working_dir: /src/backend
+    command: cargo watch -x run
+  surreal:
+    image: surrealdb/surrealdb:latest
+    container_name: website-surrealdb
+    volumes:
+      - ./surreal:/314/surreal
+    ports:
+      - "8000:8000"
+    profiles:
+      - dev
+      - deploy
+    working_dir: /314/surreal
+    command: start --log debug --user root --pass root file://./surreal.db
+  frontend-build:
+    build: ./dockerfiles/build/frontend
+    container_name: website-frontend-build
+    volumes:
+      - ./frontend:/src/frontend
+      - ./common:/src/common
+    ports:
+      - "80:80"
+    profiles:
+      - build
+    working_dir: /src/frontend
+    command: trunk build --release
+  admin-dash-build:
+    build: ./dockerfiles/build/admin-dash
+    container_name: website-admin-dash-build
+    volumes:
+      - ./admin-dash:/src/admin-dash
+      - ./common:/src/common
+    ports:
+      - "12341:12341"
+    profiles:
+      - build
+    working_dir: /src/admin-dash
+    command: trunk build --release
+  backend-build:
+    build: ./dockerfiles/build/backend
+    container_name: website-backend-build
+    volumes:
+      - ./backend:/src/backend
+      - ./common:/src/common
+    ports:
+      - "8080:8080"
+    profiles:
+      - build
+    working_dir: /src/backend
+    command: cargo build --release

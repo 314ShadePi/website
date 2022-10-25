@@ -1,3 +1,6 @@
-# Website
+# 314ShadePi's website
 
-Run: `./dev.sh`
+## Deploying
+
+Use `docker compose --profile deploy up` to deploy.
+Remember to delete both the container **AND** the image when deploying multiple times.

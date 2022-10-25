@@ -1,14 +1,11 @@
 [workspace]
-
 members = [
+    "admin-dash",
     "backend",
     "frontend",
     "common"
 ]
 
-[profile.release]
-strip = true
-debug = 0
-overflow-checks = true
-lto = true
-opt-level = 3
+default-mambers = [
+    "backend"
+]

@@ -1,35 +1,61 @@
-use actix_web::{get, middleware::Logger, App, HttpResponse, HttpServer, Responder};
+use actix_web::{
+    get,
+    middleware::Logger,
+    post,
+    web::{self, scope},
+    App, HttpResponse, HttpServer, Responder,
+};
+use actix_web_lab::web::spa;
 
-#[get("/ping")]
-async fn ping() -> impl Responder {
-    HttpResponse::Ok().body("Hello world")
+#[get("")]
+async fn hello() -> impl Responder {
+    println!("Hello");
+    HttpResponse::Ok().body("Hello world!")
+}
+
+#[post("/echo")]
+async fn echo(req_body: String) -> impl Responder {
+    HttpResponse::Ok().body(req_body)
+}
+
+async fn manual_hello() -> impl Responder {
+    println!("Hey");
+    HttpResponse::Ok().body("Hey there!")
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    dotenv::dotenv().ok();
-    pretty_env_logger::init();
+    env_logger::init();
 
-    let dist_dir = std::env::var("DIST_DIR").unwrap_or_else(|_| "./dist".to_string());
-    let addr = std::env::var("ACTIX_ADDR").unwrap_or_else(|_| "127.0.0.1".to_string());
-    let port = std::env::var("ACTIX_PORT")
-        .unwrap_or_else(|_| "8080".to_string())
-        .parse()
-        .unwrap_or(8080);
-
-    println!("http://{}:{}", addr, port);
-
-    let front_service =
-        move || actix_files::Files::new("/", dist_dir.clone()).index_file("index.html");
-
-    HttpServer::new(move || {
+    HttpServer::new(|| {
         let logger = Logger::default();
+
         App::new()
             .wrap(logger)
-            .service(ping)
-            .service(front_service())
+            .service(
+                scope("/api")
+                    .service(hello)
+                    .service(echo)
+                    .route("/hey", web::get().to(manual_hello)),
+            )
+            .service(
+                scope("/admin").service(
+                    spa()
+                        .index_file("./admin-dash/dist/index.html")
+                        .static_resources_location("./admin-dash/dist")
+                        .static_resources_mount("/")
+                        .finish(),
+                ),
+            )
+            .service(
+                spa()
+                    .index_file("./frontend/dist/index.html")
+                    .static_resources_mount("/")
+                    .static_resources_location("./frontend/dist")
+                    .finish(),
+            )
     })
-    .bind((addr, port))?
+    .bind(("0.0.0.0", 80))?
     .run()
     .await
 }

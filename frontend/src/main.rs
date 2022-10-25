@@ -3,7 +3,7 @@ use yew::prelude::*;
 #[function_component(App)]
 fn app() -> Html {
     html! {
-        <h1>{"314ShadePi"}</h1>
+        <h1>{"SUP"}</h1>
     }
 }
 
