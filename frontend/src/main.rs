@@ -1,12 +1,16 @@
-use yew::prelude::*;
-
-#[function_component(App)]
-fn app() -> Html {
-    html! {
-        <h1>{"SUP"}</h1>
-    }
-}
+use dioxus::prelude::*;
 
 fn main() {
-    yew::start_app::<App>();
+    dioxus::web::launch(app);
+}
+
+fn app(cx: Scope) -> Element {
+    cx.render(rsx! {
+        div {
+            Router {
+                Route { to: "/home", p { "Home" } Link { to: "/about", "About"} }
+                Route { to: "/about", p { "About" } Link { to: "/home", "Home"} }
+            }
+        }
+    })
 }
