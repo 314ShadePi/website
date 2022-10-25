@@ -1,7 +1,8 @@
 **/dist
 **/target
+history.txt
+/surreal
 
 # Added by cargo
 
 /target
-history.txt
