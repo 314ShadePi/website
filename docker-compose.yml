@@ -1,5 +1,14 @@
 version: "3.9"
 services:
+  deploy:
+    build: .
+    container_name: website-deploy
+    ports:
+      - "80:80"
+    depends_on:
+      - surreal
+    profiles:
+      - deploy
   frontend-dev:
     build: ./dockerfiles/dev/frontend
     container_name: website-frontend-dev
@@ -53,6 +62,7 @@ services:
       - "8000:8000"
     profiles:
       - dev
+      - deploy
     working_dir: /314/surreal
     command: start --log debug --user root --pass root file://./surreal.db
   frontend-build:

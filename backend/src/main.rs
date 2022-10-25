@@ -7,8 +7,9 @@ use actix_web::{
 };
 use actix_web_lab::web::spa;
 
-#[get("/")]
+#[get("")]
 async fn hello() -> impl Responder {
+    println!("Hello");
     HttpResponse::Ok().body("Hello world!")
 }
 
@@ -18,6 +19,7 @@ async fn echo(req_body: String) -> impl Responder {
 }
 
 async fn manual_hello() -> impl Responder {
+    println!("Hey");
     HttpResponse::Ok().body("Hey there!")
 }
 

@@ -5,3 +5,7 @@ members = [
     "frontend",
     "common"
 ]
+
+default-mambers = [
+    "backend"
+]
