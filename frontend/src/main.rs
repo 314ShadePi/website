@@ -1,3 +1,4 @@
+mod core;
 mod components;
 
 use dioxus::prelude::*;
@@ -10,11 +11,9 @@ fn main() {
 
 fn app(cx: Scope) -> Element {
     cx.render(rsx! {
-        div {
             Router {
-                page::page {to: "/", content: cx.render(rsx! { div { p { "Home" } Link { to: "/about", "About" } }})}
-                page::page {to: "/about", content: cx.render(rsx! { div { p { "About" } Link { to: "/", "Home" } }})}
+                page::page {to: "/", name: "Home", should_be_on_navbar: false, content: cx.render(rsx! { div { p { "Home" } Link { to: "/about", "About" } }})}
+                page::page {to: "/about", name: "Home", should_be_on_navbar: true, content: cx.render(rsx! { div { p { "About" } Link { to: "/", "Home" } }})}
             }
-        }
     })
 }
