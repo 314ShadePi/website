@@ -1,4 +1,9 @@
+mod core;
+mod components;
+
 use dioxus::prelude::*;
+
+use crate::components::pages::core::page;
 
 fn main() {
     dioxus::web::launch(app);
@@ -6,12 +11,9 @@ fn main() {
 
 fn app(cx: Scope) -> Element {
     cx.render(rsx! {
-        div {
             Router {
-                h1 { style: "color: red;", "test" }
-                Route { to: "/", p { "Home" } Link { to: "/about", "About"} }
-                Route { to: "/about", p { "About" } Link { to: "/", "Home"} }
+                page::page {to: "/", name: "Home", should_be_on_navbar: false, content: cx.render(rsx! { div { p { "Home" } Link { to: "/about", "About" } }})}
+                page::page {to: "/about", name: "Home", should_be_on_navbar: true, content: cx.render(rsx! { div { p { "About" } Link { to: "/", "Home" } }})}
             }
-        }
     })
 }

@@ -7,4 +7,4 @@ edition = "2021"
 
 [dependencies]
 common = { path = "../common" }
-dioxus = { version = "0.2.4", features = ["web", "router"] }
+dioxus = { version = "0.2.4", features = ["web", "router", "fermi"] }
