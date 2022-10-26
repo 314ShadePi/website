@@ -1,0 +1,20 @@
+html,
+body {
+	color: #424242;
+	font-family: $family-serif;
+}
+
+body .container-all {
+	display: grid;
+	place-items: center;
+}
+
+pre {
+	font-family: $family-monospace-code;
+	background-color: $body-background-color;
+}
+
+.button {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
