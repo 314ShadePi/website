@@ -1,3 +1,5 @@
+use std::rc::Rc;
+
 use crate::core::s_page;
 
 use super::header;
@@ -10,6 +12,7 @@ pub struct PageProps<'a> {
     should_be_on_navbar: bool,
     content: Element<'a>,
     oncreate: EventHandler<'a, s_page::Page>,
+    pages: Rc<Vec<s_page::Page>>,
 }
 // https://docs.rs/dioxus/latest/dioxus/prelude/struct.EventHandler.html
 pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
@@ -23,7 +26,7 @@ pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
     cx.render(rsx! {
         Route {
             to: "{cx.props.to}",
-            header::header { active_route: cx.props.to }
+            header::header { active_route: cx.props.to, pages: cx.props.pages.clone() }
             &cx.props.content
         }
     })

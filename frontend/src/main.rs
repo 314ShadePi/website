@@ -37,7 +37,8 @@ fn app(cx: Scope) -> Element {
                             Link { to: "/about", "About" }
                         }
                     }),
-                    oncreate: page_oncreate
+                    oncreate: page_oncreate,
+                    pages: pages.current()
                 }
                 page::page {
                     to: "/about",
@@ -50,6 +51,7 @@ fn app(cx: Scope) -> Element {
                         }
                     }),
                     oncreate: page_oncreate
+                    pages: pages.current()
                 }
             }
     })
