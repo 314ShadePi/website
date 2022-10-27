@@ -8,4 +8,6 @@ edition = "2021"
 [dependencies]
 common = { path = "../common" }
 dioxus = { version = "0.2.4", features = ["web", "router", "fermi"] }
+gloo = "0.8.0"
+gloo-utils = "0.1.5"
 state = "0.5.3"

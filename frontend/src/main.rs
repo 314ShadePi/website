@@ -10,35 +10,46 @@ fn main() {
     dioxus::web::launch(app);
 }
 
-static PAGES: state::Storage<Vec<s_page::Page>> = state::Storage::new();
-
 fn app(cx: Scope) -> Element {
-    PAGES.set(vec![s_page::Page { to: "/", name: "Home" }]);
+    let pages = use_state(&cx, || {
+        vec![s_page::Page {
+            to: "/",
+            name: "Home",
+        }]
+    });
+
+    let page_oncreate = move |page: s_page::Page| {
+        if !pages.contains(&page) {
+            pages.with_mut(|pages| pages.append(&mut vec![page]));
+        }
+        gloo::console::log!(format!("{:#?}", pages));
+    };
+
     cx.render(rsx! {
             Router {
                 page::page {
-                    state: &PAGES,
                     to: "/",
                     name: "Home",
-                    should_be_on_navbar: false,
+                    should_be_on_navbar: true,
                     content: cx.render(rsx! {
                         div {
                             p { "Home" }
                             Link { to: "/about", "About" }
                         }
-                    })
+                    }),
+                    oncreate: page_oncreate
                 }
                 page::page {
-                    state: &PAGES,
                     to: "/about",
-                    name: "Home",
+                    name: "About",
                     should_be_on_navbar: true,
                     content: cx.render(rsx! {
                         div {
                             p { "About" }
                             Link { to: "/", "Home" }
                         }
-                    })
+                    }),
+                    oncreate: page_oncreate
                 }
             }
     })
