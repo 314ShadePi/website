@@ -11,7 +11,7 @@ pub struct PageProps<'a> {
     content: Element<'a>,
     state: &'a state::Storage<Vec<s_page::Page>>,
 }
-
+// https://docs.rs/dioxus/latest/dioxus/prelude/struct.EventHandler.html
 pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
     if cx.props.should_be_on_navbar == true {
         let pages = cx.props.state.clone();
