@@ -1,6 +1,6 @@
 use std::rc::Rc;
 
-use super::header;
+use super::{footer, header};
 use dioxus::prelude::*;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -34,10 +34,13 @@ pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
             div {
                 id: "space-top"
             }
-            div {
-                class: "main-container",
+            main {
                 &cx.props.content
             }
+            div {
+                id: "space-bottom"
+            }
+            footer::footer {}
         }
     })
 }

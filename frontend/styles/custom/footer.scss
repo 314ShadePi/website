@@ -9,7 +9,7 @@ footer {
 		place-items: center;
 		position: fixed;
 		bottom: 0;
-		width: 100%;
+		width: 100vw;
 		z-index: 9;
 		background-color: $black;
 
@@ -20,14 +20,13 @@ footer {
 		}
 
 		#footer-line {
-			width: 100%;
+			width: 100vw;
 			height: 1px;
 		}
 
 		.inner {
 			display: grid;
 			place-items: center;
-			margin-left: 2rem;
 			font-family: "FiraCode";
 		}
 

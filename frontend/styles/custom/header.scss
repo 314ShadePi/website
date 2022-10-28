@@ -44,7 +44,7 @@ header {
 	}
 
 	.container {
-		max-width: 1170px;
+		max-width: 65vw;
 		margin: auto;
 	}
 
@@ -75,7 +75,8 @@ header {
 	.nav {
 		ul li {
 			display: inline-block;
-			margin-left: 40px;
+			margin-left: 20px;
+			margin-right: 20px;
 
 			a {
 				display: block;

@@ -2,7 +2,7 @@ mod components;
 
 use dioxus::prelude::*;
 
-use crate::components::pages::core::{footer, page};
+use crate::components::pages::core::page;
 
 fn main() {
     dioxus::web::launch(app);
@@ -31,8 +31,10 @@ fn app(cx: Scope) -> Element {
                     should_be_on_navbar: true,
                     content: cx.render(rsx! {
                         div {
+                            class: "page",
                             p { "Home" }
                             Link { to: "/about", "About" }
+                            p { "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }
                         }
                     }),
                     oncreate: page_oncreate,
@@ -44,6 +46,7 @@ fn app(cx: Scope) -> Element {
                     should_be_on_navbar: true,
                     content: cx.render(rsx! {
                         div {
+                            class: "page",
                             p { "About" }
                             Link { to: "/", "Home" }
                         }
@@ -52,9 +55,5 @@ fn app(cx: Scope) -> Element {
                     pages: pages.current()
                 }
             }
-            div {
-                id: "space-bottom"
-            }
-            footer::footer {}
     })
 }
