@@ -36,7 +36,7 @@ $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 
-@import "./crucial.css/crucial.css";
-@import "./crucial.css/utilities.css";
+@import "./crucial.css/crucial.scss";
+@import "./crucial.css/utilities.scss";
 @import "./bulma/bulma.sass";
 @import "./custom/style.scss";
