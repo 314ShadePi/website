@@ -7,4 +7,8 @@ edition = "2021"
 
 [dependencies]
 common = { path = "../common" }
-yew = "0.19.3"
+dioxus = { version = "0.2.4", features = ["web", "router"] }
+dioxus-html-macro = "0.2.0"
+gloo = "0.8.0"
+gloo-utils = "0.1.5"
+web-sys = "0.3.60"

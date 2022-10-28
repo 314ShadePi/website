@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+@font-face {
+	font-family: "FiraCode";
+	src: url("./static/fonts/FiraCode-Regular.ttf");
+}
+
+// Set your brand colors
+$purple: #8a4d76;
+$cccxiv: #314;
+$pink: #fa7c91;
+$brown: #757763;
+$beige-light: #d0d1cd;
+$beige-lighter: #eff0eb;
+$black: #0d1117;
+$white: #fff;
+$blue-1: #2887fc;
+
+// Variables
+$header-background: #161b22;
+
+// Update Bulma's global variables
+$family-sans-serif: "Times New Roman", Times, serif;
+$family-serif: "Times New Roman", Times, serif;
+$family-monospace-code: "FiraCode";
+$grey-dark: $brown;
+$grey-light: $beige-light;
+$primary: $cccxiv;
+$link: $blue-1;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+$body-background-color: $black;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+@import "./crucial.css/crucial.scss";
+@import "./crucial.css/utilities.scss";
+@import "./bulma/bulma.sass";
+@import "./custom/style.scss";

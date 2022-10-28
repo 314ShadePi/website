@@ -1,0 +1,178 @@
+$padding-top: 10px;
+$padding-bottom: 5px;
+$line-height: 1px;
+$line-width: 100%;
+
+$line-position-top: $padding-bottom + 44px;
+
+header {
+	line-height: 1;
+	background-color: $header-background;
+	padding-top: $padding-top;
+	padding-bottom: $padding-bottom;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	font-family: "FiraCode";
+	z-index: 9;
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	ul {
+		list-style: none;
+	}
+
+	#header-line {
+		width: $line-width;
+		height: $line-height;
+		position: absolute;
+		top: $line-position-top;
+	}
+
+	#nav-check {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.container {
+		max-width: 65vw;
+		margin: auto;
+	}
+
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.align-items-center {
+		align-items: center;
+	}
+
+	.justify-content-between {
+		justify-content: space-between;
+	}
+
+	.logo a {
+		font-size: 30px;
+		color: $white;
+		text-transform: capitalize;
+	}
+
+	.logo,
+	.nav {
+		padding: 0 15px;
+	}
+
+	.nav {
+		ul li {
+			display: inline-block;
+			margin-left: 20px;
+			margin-right: 20px;
+
+			a {
+				display: block;
+				font-size: 16px;
+				padding: 10px 0;
+				color: rgba(255, 255, 255, 0.7);
+				text-transform: capitalize;
+				transition: all 0.5s ease;
+
+				&:hover,
+				&.active {
+					color: $white;
+				}
+			}
+		}
+	}
+
+	.nav-toggler {
+		height: 34px;
+		width: 44px;
+		background-color: $white;
+		border-radius: 4px;
+		cursor: pointer;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		margin-right: 15px;
+
+		span {
+			display: block;
+			height: 2px;
+			width: 20px;
+			background-color: $body-background-color;
+			position: relative;
+
+			&:before,
+			&:after {
+				content: "";
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: $body-background-color;
+				left: 0;
+			}
+
+			&:before {
+				top: -6px;
+			}
+
+			&:after {
+				top: 6px;
+			}
+		}
+	}
+}
+
+@media (max-width: 991px) {
+	header .nav-toggler {
+		display: flex;
+	}
+	header .nav {
+		position: absolute;
+		left: 0;
+		top: 100%;
+		width: 100%;
+		background-color: $body-background-color;
+		border-top: 1px solid rgba(255, 255, 255, 0.2);
+		opacity: 0;
+		visibility: hidden;
+	}
+	header .nav ul li {
+		display: block;
+		margin: 0;
+	}
+	header #nav-check:checked ~ .nav {
+		opacity: 1;
+		visibility: visible;
+	}
+	header #nav-check:focus ~ .nav-toggler {
+		box-shadow: 0 0 15px #000000;
+	}
+	header #nav-check:checked ~ .nav-toggler span {
+		background-color: transparent;
+	}
+	header #nav-check:checked ~ .nav-toggler span::before {
+		top: 0;
+		transform: rotate(45deg);
+	}
+	header #nav-check:checked ~ .nav-toggler span::after {
+		top: 0;
+		transform: rotate(-45deg);
+	}
+}
+
+.logo .navbar-logo {
+	display: grid;
+	place-items: center;
+	font-size: 1.5rem;
+}
