@@ -2,23 +2,52 @@ use std::rc::Rc;
 
 use dioxus::prelude::*;
 
-use crate::core::s_page;
+use super::page::Page;
 
 #[derive(Props)]
 pub struct HeaderProps<'a> {
     active_route: &'a str,
-    pages: Rc<Vec<s_page::Page>>,
+    pages: Rc<Vec<Page>>,
 }
 
-// Something is not working here
 pub fn header<'a>(cx: Scope<'a, HeaderProps<'a>>) -> Element {
     cx.render(rsx! {
-        div {
-            "Header: active_route = {cx.props.active_route}"
-            ul {
-                cx.props.pages.iter().map(|page| rsx! {
-                    li { Link { to: "{page.to}", "{page.name}" } }
-                })
+        header {
+            class: "header",
+            id: "header-main",
+            div {
+                class: "container",
+                div {
+                    class: "row align-items-center justify-content-between",
+                    div {
+                        class: "logo",
+                        span {
+                            class: "navbar-logo",
+                            Link {
+                                to: "/",
+                                "314ShadePi"
+                            }
+                        }
+                    }
+                    nav {
+                        class: "nav",
+                        ul {
+                            cx.props.pages.iter().map(|page| {
+                                let active = if page.to == cx.props.active_route {
+                                    "active"
+                                } else {
+                                    "inactive"
+                                };
+                                rsx! {
+                                    li { Link { to: "{page.to}", class: "{active}", "{page.name}" } }
+                                }
+                        })
+                        }
+                    }
+                }
+            }
+            hr {
+                id: "header-line"
             }
         }
     })

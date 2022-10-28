@@ -1,10 +1,8 @@
 mod components;
-mod core;
 
 use dioxus::prelude::*;
 
-use crate::components::pages::core::page;
-use crate::core::s_page;
+use crate::components::pages::core::{footer, page};
 
 fn main() {
     dioxus::web::launch(app);
@@ -12,13 +10,13 @@ fn main() {
 
 fn app(cx: Scope) -> Element {
     let pages = use_state(&cx, || {
-        vec![s_page::Page {
+        vec![page::Page {
             to: "/",
             name: "Home",
         }]
     });
 
-    let page_oncreate = move |page: s_page::Page| {
+    let page_oncreate = move |page: page::Page| {
         if !pages.contains(&page) {
             pages.with_mut(|pages| pages.append(&mut vec![page]));
         }
@@ -54,5 +52,9 @@ fn app(cx: Scope) -> Element {
                     pages: pages.current()
                 }
             }
+            div {
+                id: "space-bottom"
+            }
+            footer::footer {}
     })
 }

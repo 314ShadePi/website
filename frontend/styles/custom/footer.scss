@@ -1,0 +1,39 @@
+$padding-top: 15px;
+
+footer {
+	display: grid;
+	place-items: center;
+
+	.footer-container {
+		display: grid;
+		place-items: center;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		z-index: 9;
+		background-color: $black;
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		#footer-line {
+			width: 100%;
+			height: 1px;
+		}
+
+		.inner {
+			display: grid;
+			place-items: center;
+			margin-left: 2rem;
+			font-family: "FiraCode";
+		}
+
+		.footer-text-container {
+			margin-bottom: 1.1rem;
+			padding-top: $padding-top;
+		}
+	}
+}

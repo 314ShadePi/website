@@ -1,9 +1,13 @@
 use std::rc::Rc;
 
-use crate::core::s_page;
-
 use super::header;
 use dioxus::prelude::*;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Page {
+    pub to: &'static str,
+    pub name: &'static str,
+}
 
 #[derive(Props)]
 pub struct PageProps<'a> {
@@ -11,13 +15,13 @@ pub struct PageProps<'a> {
     name: &'static str,
     should_be_on_navbar: bool,
     content: Element<'a>,
-    oncreate: EventHandler<'a, s_page::Page>,
-    pages: Rc<Vec<s_page::Page>>,
+    oncreate: EventHandler<'a, Page>,
+    pages: Rc<Vec<Page>>,
 }
-// https://docs.rs/dioxus/latest/dioxus/prelude/struct.EventHandler.html
+
 pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
     if cx.props.should_be_on_navbar == true {
-        cx.props.oncreate.call(s_page::Page {
+        cx.props.oncreate.call(Page {
             to: cx.props.to,
             name: cx.props.name,
         });
@@ -27,7 +31,13 @@ pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
         Route {
             to: "{cx.props.to}",
             header::header { active_route: cx.props.to, pages: cx.props.pages.clone() }
-            &cx.props.content
+            div {
+                id: "space-top"
+            }
+            div {
+                class: "main-container",
+                &cx.props.content
+            }
         }
     })
 }
