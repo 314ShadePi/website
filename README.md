@@ -2,5 +2,5 @@
 
 ## Deploying
 
-Use `docker compose --profile deploy up` to deploy.
+Use `./deploy.sh` to deploy.
 Remember to delete both the container **AND** the image when deploying multiple times.
