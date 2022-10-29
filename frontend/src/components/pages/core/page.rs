@@ -7,6 +7,7 @@ use dioxus::prelude::*;
 pub struct Page {
     pub to: &'static str,
     pub name: &'static str,
+    pub display: bool,
 }
 
 #[derive(Props)]
@@ -24,6 +25,7 @@ pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
         cx.props.oncreate.call(Page {
             to: cx.props.to,
             name: cx.props.name,
+            display: true,
         });
     }
 

@@ -5,6 +5,10 @@ $line-width: 100%;
 
 $line-position-top: $padding-bottom + 44px;
 
+#nav-no-display {
+	display: none;
+}
+
 header {
 	line-height: 1;
 	background-color: $header-background;
