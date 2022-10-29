@@ -4,7 +4,7 @@ services:
     build: .
     container_name: website-deploy
     ports:
-      - "80:80"
+      - "0.0.0.0:80:80"
     depends_on:
       - surreal
     profiles:
@@ -16,7 +16,7 @@ services:
       - ./frontend:/src/frontend
       - ./common:/src/common
     ports:
-      - "8080:8080"
+      - "0.0.0.0:8080:8080"
     depends_on:
       - backend-dev
     profiles:
@@ -30,7 +30,7 @@ services:
       - ./admin-dash:/src/admin-dash
       - ./common:/src/common
     ports:
-      - "12341:12341"
+      - "0.0.0.0:12341:12341"
     depends_on:
       - backend-dev
     profiles:
@@ -46,7 +46,7 @@ services:
       - ./admin-dash:/src/admin-dash
       - ./common:/src/common
     ports:
-      - "80:80"
+      - "0.0.0.0:80:80"
     depends_on:
       - surreal
     profiles:
@@ -59,7 +59,7 @@ services:
     volumes:
       - ./surreal:/314/surreal
     ports:
-      - "8000:8000"
+      - "0.0.0.0:8000:8000"
     profiles:
       - dev
       - deploy

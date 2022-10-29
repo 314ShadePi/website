@@ -11,8 +11,9 @@ fn main() {
 fn app(cx: Scope) -> Element {
     let pages = use_state(&cx, || {
         vec![page::Page {
-            to: "/",
-            name: "Home",
+            to: "",
+            name: "",
+            display: false,
         }]
     });
 
