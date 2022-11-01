@@ -52,7 +52,8 @@ pub fn header<'a>(cx: Scope<'a, HeaderProps<'a>>) -> Element {
                                         li { class: "{li_class}", Link { to: "{page.to}", class: "{active}", "{page.name}" } }
                                     }
                                 }
-                        })
+                            })
+                            li { class: "display", Link { to: "https://github.com/314ShadePi/website", external: true, "Github" }}
                         }
                     }
                 }
