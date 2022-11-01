@@ -43,7 +43,11 @@ pub fn header<'a>(cx: Scope<'a, HeaderProps<'a>>) -> Element {
                                         li { class: "display", Link { to: "{page.to}", class: "{active}", "{page.name}" } }
                                     }
                                 } else {
-                                    let li_class = if page.to == "/escroom" {"display-none secret"} else {"display-none"};
+                                    let li_class = if page.to == "/1ryqe-3aakenrScHyF4T6A9LTg7rw4Sk2LmpUlCtrjWASMBKvmtMTkW62up198TtDwPxQr5U5Ew0CfcONSQz2JnAr7cK_5MtZkGGjF3xVFS-RQuOWyxuBDI0y2-YSb6Kc4BQuaWHsW_IOk6RgXl3iqS1jQ_3-W4kcH6EmDn5uY488k3QWoOKs3eg-E20ByHJXiA2VQJqpU_qCrQEKioBaD0bKzFw" {
+                                        "display-none secret"
+                                    } else {
+                                        "display-none"
+                                    };
                                     rsx! { 
                                         li { class: "{li_class}", Link { to: "{page.to}", class: "{active}", "{page.name}" } }
                                     }
