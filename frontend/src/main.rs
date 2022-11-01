@@ -23,7 +23,7 @@ fn app(cx: Scope) -> Element {
         }
     };
 
-    gloo::console::info!("Secrets may be found by navigating.");
+    gloo::console::info!("Secrets may be found by getting a heading and navigating.");
 
     cx.render(rsx! {
             Router {
