@@ -33,17 +33,20 @@ pub fn header<'a>(cx: Scope<'a, HeaderProps<'a>>) -> Element {
                         class: "nav",
                         ul {
                             cx.props.pages.iter().map(|page| {
-                                if page.display == true {
-                                    let active = if page.to == cx.props.active_route {
-                                        "active"
-                                    } else {
-                                        "inactive"
-                                    };
+                                let active = if page.to == cx.props.active_route {
+                                    "active"
+                                } else {
+                                    "inactive"
+                                };
+                                if page.display == true || page.to == cx.props.active_route {
                                     rsx! {
-                                        li { Link { to: "{page.to}", class: "{active}", "{page.name}" } }
+                                        li { class: "display", Link { to: "{page.to}", class: "{active}", "{page.name}" } }
                                     }
                                 } else {
-                                    rsx! { p { id: "nav-no-display"} }
+                                    let li_class = if page.to == "/escroom" {"display-none secret"} else {"display-none"};
+                                    rsx! { 
+                                        li { class: "{li_class}", Link { to: "{page.to}", class: "{active}", "{page.name}" } }
+                                    }
                                 }
                         })
                         }

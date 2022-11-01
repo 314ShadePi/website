@@ -21,13 +21,11 @@ pub struct PageProps<'a> {
 }
 
 pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
-    if cx.props.should_be_on_navbar == true {
-        cx.props.oncreate.call(Page {
-            to: cx.props.to,
-            name: cx.props.name,
-            display: true,
-        });
-    }
+    cx.props.oncreate.call(Page {
+        to: cx.props.to,
+        name: cx.props.name,
+        display: cx.props.should_be_on_navbar,
+    });
 
     cx.render(rsx! {
         Route {

@@ -1,3 +1,3 @@
 pub mod footer;
-mod header;
+pub mod header;
 pub mod page;

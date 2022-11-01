@@ -11,8 +11,8 @@ fn main() {
 fn app(cx: Scope) -> Element {
     let pages = use_state(&cx, || {
         vec![page::Page {
-            to: "",
-            name: "",
+            to: "/non-existing-page",
+            name: "test",
             display: false,
         }]
     });
@@ -49,6 +49,20 @@ fn app(cx: Scope) -> Element {
                         div {
                             class: "page",
                             p { "About" }
+                            Link { to: "/", "Home" }
+                        }
+                    }),
+                    oncreate: page_oncreate
+                    pages: pages.current()
+                }
+                page::page {
+                    to: "/escroom",
+                    name: "Secret",
+                    should_be_on_navbar: false,
+                    content: cx.render(rsx! {
+                        div {
+                            class: "page",
+                            p { "Escape room" }
                             Link { to: "/", "Home" }
                         }
                     }),

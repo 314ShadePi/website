@@ -76,24 +76,30 @@ header {
 		padding: 0 15px;
 	}
 
-	.nav {
-		ul li {
-			display: inline-block;
-			margin-left: 20px;
-			margin-right: 20px;
+	nav.nav {
+		ul {
+			li.display {
+				display: inline-block;
+				margin-left: 20px;
+				margin-right: 20px;
 
-			a {
-				display: block;
-				font-size: 16px;
-				padding: 10px 0;
-				color: rgba(255, 255, 255, 0.7);
-				text-transform: capitalize;
-				transition: all 0.5s ease;
+				a {
+					display: block;
+					font-size: 16px;
+					padding: 10px 0;
+					color: rgba(255, 255, 255, 0.7);
+					text-transform: capitalize;
+					transition: all 0.5s ease;
 
-				&:hover,
-				&.active {
-					color: $white;
+					&:hover,
+					&.active {
+						color: $white;
+					}
 				}
+			}
+			li.secret,
+			li.display-none {
+				display: none;
 			}
 		}
 	}
