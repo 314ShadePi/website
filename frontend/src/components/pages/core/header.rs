@@ -44,14 +44,9 @@ pub fn header<'a>(cx: Scope<'a, HeaderProps<'a>>) -> Element {
                             class: "nav",
                             ul {
                                 cx.props.pages.iter().map(|page| {
-                                    let active = if page.to == cx.props.active_route {
-                                        "active"
-                                    } else {
-                                        "inactive"
-                                    };
                                     if page.display == true || page.to == cx.props.active_route {
                                         rsx! {
-                                            li { class: "display", Link { to: "{page.to}", class: "{active}", "{page.name}" } }
+                                            li { class: "display", Link { to: "{page.to}", "{page.name}" } }
                                         }
                                     } else {
                                         let li_class = if page.to == "/1ryqe-3aakenrScHyF4T6A9LTg7rw4Sk2LmpUlCtrjWASMBKvmtMTkW62up198TtDwPxQr5U5Ew0CfcONSQz2JnAr7cK_5MtZkGGjF3xVFS-RQuOWyxuBDI0y2-YSb6Kc4BQuaWHsW_IOk6RgXl3iqS1jQ_3-W4kcH6EmDn5uY488k3QWoOKs3eg-E20ByHJXiA2VQJqpU_qCrQEKioBaD0bKzFw" {
@@ -60,11 +55,11 @@ pub fn header<'a>(cx: Scope<'a, HeaderProps<'a>>) -> Element {
                                             "display-none"
                                         };
                                         rsx! { 
-                                            li { class: "{li_class}", Link { to: "{page.to}", class: "{active}", "{page.name}" } }
+                                            li { class: "{li_class}", Link { to: "{page.to}", "{page.name}" } }
                                         }
                                     }
                                 })
-                                li { class: "display", Link { to: "https://github.com/314ShadePi/website", external: true, "Github" }}
+                                li { class: "display", Link { to: "https://github.com/314ShadePi/website", external: true, new_tab: true, "Github" }}
                             }
                         }
                     }
