@@ -33,7 +33,7 @@ fn app(cx: Scope) -> Element {
                     should_be_on_navbar: true,
                     content: cx.render(rsx! {
                         div {
-                            class: "page",
+                            class: "page page-home",
                             p { "Home" }
                             Link { to: "/about", "About" }
                             p { "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }
@@ -48,7 +48,7 @@ fn app(cx: Scope) -> Element {
                     should_be_on_navbar: true,
                     content: cx.render(rsx! {
                         div {
-                            class: "page",
+                            class: "page page-about",
                             p { "About" }
                             Link { to: "/", "Home" }
                         }
@@ -62,9 +62,8 @@ fn app(cx: Scope) -> Element {
                     should_be_on_navbar: false,
                     content: cx.render(rsx! {
                         div {
-                            class: "page",
-                            p { "Escape room" }
-                            Link { to: "/", "Home" }
+                            class: "page page-secret",
+                            h1 { class: "title", "U+1F44D" }
                         }
                     }),
                     oncreate: page_oncreate
