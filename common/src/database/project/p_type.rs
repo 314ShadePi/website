@@ -15,6 +15,7 @@ pub enum OS {
     Mac,
 }
 
+/// Engine refers to both engines, frameworks and libraries
 #[derive(Debug, Serialize, Deserialize)]
 pub enum Engine {
     Unreal { version: UnrealVer },
