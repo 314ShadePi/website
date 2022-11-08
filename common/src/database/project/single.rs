@@ -1,4 +1,4 @@
-use super::p_type::Type;
+use super::{p_type::Type, description_part::DescriptionPart};
 use super::tags::Tags;
 
 use serde::{Deserialize, Serialize};
@@ -9,4 +9,5 @@ pub struct Project {
     pub name: String,
     pub tags: Vec<Tags>,
     pub p_type: Type,
+    pub description: Vec<DescriptionPart>,
 }
