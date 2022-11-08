@@ -2,7 +2,7 @@ use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct DescriptionPart {
     /// Determines the content-type of the sub-description. Used for headings and metadata.
     pub desc_type: DescType,
@@ -11,7 +11,7 @@ pub struct DescriptionPart {
     pub content: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub enum DescType {
     Usage,
     Installation,
@@ -27,7 +27,7 @@ impl DescriptionPart {
         let binding = binding.replace(" ", "-");
         let title: &str = binding.as_str();
         cx.render(rsx! {
-            div {
+            section {
                 class: "sub-description",
                 id: "{title}",
                 self.desc_type.render(cx)

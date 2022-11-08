@@ -17,11 +17,28 @@ impl Project {
     pub fn render_single(self, cx: Scope) -> Element {
         let binding = self.id;
         let id: &str = binding.as_str();
+        let binding = self.name;
+        let name: &str = binding.as_str();
+        let binding = self.p_type.to_string();
+        let p_type: &str = binding.as_str();
+        let desc = &self.description.clone();
         cx.render(rsx! {
-            div {
+            article {
                 class: "project",
                 id: "{id}",
-                "LOL"
+                h1 {
+                    class: "title p-title",
+                    "{name}"
+                }
+                p {
+                    class: "type",
+                    "{p_type}"
+                }
+                desc.iter().map(|desc_p| {
+                    rsx! {
+                        desc_p.clone().render(cx)
+                    }
+                })
             }
         })
     }
