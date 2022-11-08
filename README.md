@@ -17,4 +17,4 @@ Remember to delete both the container **AND** the image when deploying multiple 
 - dev: `docker compose --profile dev up`
 - build `docker compose --profile build up`
 - deploy `./deploy.sh`
-- setup: `setup.sh`
+- setup: `./setup.sh`
