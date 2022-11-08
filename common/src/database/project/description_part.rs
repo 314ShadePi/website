@@ -1,10 +1,10 @@
+use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::fmt;
-use dioxus::prelude::*;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct DescriptionPart {
-    /// Determines the contenttype of the subdescription. Used for headings and metadata.
+    /// Determines the content-type of the sub-description. Used for headings and metadata.
     pub desc_type: DescType,
     /// Set this to true if there is ***Any*** html tags, otherwise they won't be rendered.
     pub is_html: bool,
@@ -20,7 +20,7 @@ pub enum DescType {
 }
 
 impl DescriptionPart {
-    fn render(self, cx: Scope) -> Element {
+    pub fn render(self, cx: Scope) -> Element {
         let binding = self.content;
         let content: &str = binding.as_str();
         let binding = self.desc_type.to_string();
@@ -28,7 +28,7 @@ impl DescriptionPart {
         let title: &str = binding.as_str();
         cx.render(rsx! {
             div {
-                class: "subdescription",
+                class: "sub-description",
                 id: "{title}",
                 self.desc_type.render(cx)
                 if self.is_html == true {
@@ -50,7 +50,7 @@ impl DescriptionPart {
 }
 
 impl DescType {
-    fn render(self, cx: Scope) -> Element {
+    pub fn render(self, cx: Scope) -> Element {
         let binding = self.to_string();
         let title: &str = binding.as_str();
         cx.render(rsx! {

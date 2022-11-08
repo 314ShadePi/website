@@ -1,5 +1,6 @@
 mod components;
 
+use common::database::project::{description_part::*, p_type::*, single::Project, tags::*};
 use dioxus::prelude::*;
 
 use crate::components::pages::core::page;
@@ -24,6 +25,25 @@ fn app(cx: Scope) -> Element {
     };
 
     gloo::console::info!("Secrets may be found by getting a heading and navigating.");
+
+    let test_data = Project {
+        id: "test_id".to_string(),
+        name: "TestProj".to_string(),
+        tags: vec![Tags::Cli, Tags::Game],
+        p_type: Type::Game {
+            os: vec![OS::Windows {
+                version: vec![WinVer::Eleven],
+            }],
+            engine: Engine::Unreal {
+                version: UnrealVer::Five,
+            },
+        },
+        description: vec![DescriptionPart {
+            desc_type: DescType::Usage,
+            is_html: false,
+            content: "Test project".to_string(),
+        }],
+    };
 
     cx.render(rsx! {
             Router {
@@ -64,6 +84,18 @@ fn app(cx: Scope) -> Element {
                         div {
                             class: "page page-secret",
                             h1 { class: "title", "U+1F44D" }
+                        }
+                    }),
+                    oncreate: page_oncreate
+                    pages: pages.current()
+                }
+                page::page {
+                    to: "/project",
+                    name: "Project",
+                    should_be_on_navbar: true,
+                    content: cx.render(rsx! {
+                        div {
+                            test_data.render_single(cx)
                         }
                     }),
                     oncreate: page_oncreate
