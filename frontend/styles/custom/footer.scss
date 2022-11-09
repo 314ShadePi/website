@@ -27,7 +27,7 @@ footer {
 		.inner {
 			display: grid;
 			place-items: center;
-			font-family: "FiraCode";
+			font-family: $family-monospace-code;
 		}
 
 		.footer-text-container {

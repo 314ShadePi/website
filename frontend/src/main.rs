@@ -2,7 +2,10 @@ mod components;
 
 use dioxus::prelude::*;
 
-use crate::components::pages::{core::page, projects, project};
+use crate::components::pages::{
+    core::{footer, header, page},
+    project, projects,
+};
 
 fn main() {
     dioxus::web::launch(app);
@@ -27,6 +30,10 @@ fn app(cx: Scope) -> Element {
 
     cx.render(rsx! {
             Router {
+                header::header { pages: pages.current().clone() }
+                div {
+                    id: "space-top"
+                }
                 page::page {
                     to: "/",
                     name: "Home",
@@ -39,8 +46,7 @@ fn app(cx: Scope) -> Element {
                             p { "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }
                         }
                     }),
-                    oncreate: page_oncreate,
-                    pages: pages.current()
+                    oncreate: page_oncreate
                 }
                 page::page {
                     to: "/about",
@@ -54,7 +60,6 @@ fn app(cx: Scope) -> Element {
                         }
                     }),
                     oncreate: page_oncreate
-                    pages: pages.current()
                 }
                 page::page {
                     to: "/1ryqe-3aakenrScHyF4T6A9LTg7rw4Sk2LmpUlCtrjWASMBKvmtMTkW62up198TtDwPxQr5U5Ew0CfcONSQz2JnAr7cK_5MtZkGGjF3xVFS-RQuOWyxuBDI0y2-YSb6Kc4BQuaWHsW_IOk6RgXl3iqS1jQ_3-W4kcH6EmDn5uY488k3QWoOKs3eg-E20ByHJXiA2VQJqpU_qCrQEKioBaD0bKzFw",
@@ -67,7 +72,6 @@ fn app(cx: Scope) -> Element {
                         }
                     }),
                     oncreate: page_oncreate
-                    pages: pages.current()
                 }
                 page::page {
                     to: "/project",
@@ -79,7 +83,6 @@ fn app(cx: Scope) -> Element {
                         }
                     }),
                     oncreate: page_oncreate
-                    pages: pages.current()
                 }
                 page::page {
                     to: "/project/:id",
@@ -92,7 +95,6 @@ fn app(cx: Scope) -> Element {
                         }
                     }),
                     oncreate: page_oncreate
-                    pages: pages.current()
                 }
                 page::page {
                     to: "/projects",
@@ -105,8 +107,11 @@ fn app(cx: Scope) -> Element {
                         }
                     }),
                     oncreate: page_oncreate
-                    pages: pages.current()
                 }
+                div {
+                    id: "space-bottom"
+                }
+                footer::footer {}
             }
     })
 }

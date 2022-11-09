@@ -23,7 +23,7 @@ header {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	font-family: "FiraCode";
+	font-family: $family-monospace-code;
 	z-index: 9;
 
 	* {
@@ -56,16 +56,16 @@ header {
 	.container {
 		max-width: 65vw;
 		margin: auto;
-		
+
 		.row {
 			display: flex;
 			flex-wrap: wrap;
 		}
-	
+
 		.align-items-center {
 			align-items: center;
 		}
-	
+
 		.justify-content-between {
 			justify-content: space-between;
 		}

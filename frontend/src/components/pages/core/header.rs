@@ -4,13 +4,12 @@ use dioxus::prelude::*;
 
 use super::page::Page;
 
-#[derive(Props)]
-pub struct HeaderProps<'a> {
-    active_route: &'a str,
+#[derive(Props, PartialEq)]
+pub struct HeaderProps {
     pages: Rc<Vec<Page>>,
 }
 
-pub fn header<'a>(cx: Scope<'a, HeaderProps<'a>>) -> Element {
+pub fn header(cx: Scope<HeaderProps>) -> Element {
     let nav_toggler = include_str!("../../../raw_html/nav_toggler.html");
 
     cx.render(rsx! {
@@ -54,7 +53,7 @@ pub fn header<'a>(cx: Scope<'a, HeaderProps<'a>>) -> Element {
                                         } else {
                                             "display-none"
                                         };
-                                        rsx! { 
+                                        rsx! {
                                             li { class: "{li_class}", Link { to: "{page.to}", "{page.name}" } }
                                         }
                                     }

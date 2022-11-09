@@ -1,6 +1,3 @@
-use std::rc::Rc;
-
-use super::{footer, header};
 use dioxus::prelude::*;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -17,7 +14,6 @@ pub struct PageProps<'a> {
     should_be_on_navbar: bool,
     content: Element<'a>,
     oncreate: EventHandler<'a, Page>,
-    pages: Rc<Vec<Page>>,
 }
 
 pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
@@ -30,17 +26,9 @@ pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
     cx.render(rsx! {
         Route {
             to: "{cx.props.to}",
-            header::header { active_route: cx.props.to, pages: cx.props.pages.clone() }
-            div {
-                id: "space-top"
-            }
             main {
                 &cx.props.content
             }
-            div {
-                id: "space-bottom"
-            }
-            footer::footer {}
         }
     })
 }
