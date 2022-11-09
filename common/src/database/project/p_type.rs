@@ -1,14 +1,14 @@
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum Type {
     Game { os: Vec<OS>, engine: Engine },
     Desktop { os: Vec<OS>, engine: Engine },
     Web { engine: Engine },
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum OS {
     Windows { version: Vec<WinVer> },
     Linux,
@@ -16,7 +16,7 @@ pub enum OS {
 }
 
 /// Engine refers to both engines, frameworks and libraries
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum Engine {
     Unreal { version: UnrealVer },
     Unity,
@@ -27,13 +27,13 @@ pub enum Engine {
     EguiEframe,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum UnrealVer {
     Four,
     Five,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub enum WinVer {
     Ten,
     Eleven,
