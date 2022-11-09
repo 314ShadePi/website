@@ -1,10 +1,11 @@
 use super::tags::Tags;
 use super::{description_part::DescriptionPart, p_type::Type};
 
+use c314_utils::prelude::ToStaticStr;
 use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Project {
     pub id: String,
     pub name: String,
@@ -49,6 +50,44 @@ impl Project {
                         desc_p.clone().render(cx)
                     }
                 })
+            }
+        })
+    }
+
+    pub fn render_multiple<'a>(self, cx: Scope<'a>, mut f: impl FnMut(String) + 'a) -> Element<'a> {
+        let binding: String = self.id;
+        let id: &'static str = binding.to_static_str();
+        let binding: String = self.name;
+        let name: &'static str = binding.to_static_str();
+        let binding: String = self.p_type.to_string();
+        let p_type: &'static str = binding.to_static_str();
+        let binding: String = self.tags
+                                    .iter()
+                                    .map(|tag| { tag.to_string() })
+                                    .collect::<Vec<String>>()
+                                    .join(", ");
+        let tags: &'static str = binding.to_static_str();
+
+        cx.render(rsx! {
+            article {
+                class: "project",
+                id: "{id}",
+                onclick: move |_| f(id.to_string()),
+                h1 {
+                    class: "title",
+                    "{name}"
+                }
+                div {
+                    class: "info",
+                    p {
+                        class: "type",
+                        "{p_type}"
+                    }
+                    p {
+                        class: "p-tags",
+                        "Tags: {tags}"
+                    }
+                }
             }
         })
     }

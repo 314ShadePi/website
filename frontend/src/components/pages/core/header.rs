@@ -44,7 +44,7 @@ pub fn header<'a>(cx: Scope<'a, HeaderProps<'a>>) -> Element {
                             class: "nav",
                             ul {
                                 cx.props.pages.iter().map(|page| {
-                                    if page.display == true || page.to == cx.props.active_route {
+                                    if page.display == true {
                                         rsx! {
                                             li { class: "display", Link { to: "{page.to}", "{page.name}" } }
                                         }

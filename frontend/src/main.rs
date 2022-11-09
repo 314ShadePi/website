@@ -3,7 +3,7 @@ mod components;
 use common::database::project::{description_part::*, p_type::*, single::Project, tags::*};
 use dioxus::prelude::*;
 
-use crate::components::pages::core::page;
+use crate::components::pages::{core::page, projects, project};
 
 fn main() {
     dioxus::web::launch(app);
@@ -125,11 +125,36 @@ fn app(cx: Scope) -> Element {
                 page::page {
                     to: "/project",
                     name: "Project",
-                    should_be_on_navbar: true,
+                    should_be_on_navbar: false,
+                    content: cx.render(rsx! {
+                        Redirect {
+                            to: "/projects"
+                        }
+                    }),
+                    oncreate: page_oncreate
+                    pages: pages.current()
+                }
+                page::page {
+                    to: "/project/:id",
+                    name: "Project",
+                    should_be_on_navbar: false,
                     content: cx.render(rsx! {
                         div {
                             class: "page page-project",
-                            test_data.render_single(cx)
+                            project::project {}
+                        }
+                    }),
+                    oncreate: page_oncreate
+                    pages: pages.current()
+                }
+                page::page {
+                    to: "/projects",
+                    name: "Projects",
+                    should_be_on_navbar: true,
+                    content: cx.render(rsx! {
+                        div {
+                            class: "page page-projects",
+                            projects::projects {}
                         }
                     }),
                     oncreate: page_oncreate

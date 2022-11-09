@@ -10,6 +10,12 @@ body .container-all {
 	max-width: 100vw;
 }
 
+@media (max-width: 991px) {
+	.container-all {
+		padding: 0;
+	}
+}
+
 pre {
 	font-family: $family-monospace-code;
 	background-color: $body-background-color;

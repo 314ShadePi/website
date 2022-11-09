@@ -2,9 +2,11 @@ use common::database::project::{description_part::*, p_type::*, single::Project,
 use dioxus::prelude::*;
 
 pub fn projects(cx: Scope) -> Element {
+    let router = use_router(&cx);
+
     let test_data = vec![
         Project {
-            id: "test_id".to_string(),
+            id: "test_id_1".to_string(),
             name: "TestProj".to_string(),
             tags: vec![Tags::Cli, Tags::Game],
             p_type: Type::Game {
@@ -55,7 +57,7 @@ pub fn projects(cx: Scope) -> Element {
             ],
         },
         Project {
-            id: "test_id".to_string(),
+            id: "test_id_2".to_string(),
             name: "TestProj".to_string(),
             tags: vec![Tags::Cli, Tags::Game],
             p_type: Type::Game {
@@ -106,7 +108,7 @@ pub fn projects(cx: Scope) -> Element {
             ],
         },
         Project {
-            id: "test_id".to_string(),
+            id: "test_id_3".to_string(),
             name: "TestProj".to_string(),
             tags: vec![Tags::Cli, Tags::Game],
             p_type: Type::Game {
@@ -158,12 +160,18 @@ pub fn projects(cx: Scope) -> Element {
         },
     ];
 
+    let onclick = move |id: String| {
+        router.push_route(format!("/project/{}", id).as_str(), None, None)
+    };
+
     cx.render(rsx! {
         div {
             class: "container",
             id: "project-list",
             test_data.iter().map(|project| {
-
+                rsx! {
+                    project.clone().render_multiple(cx.clone(), onclick)
+                }
             })
         }
     })
