@@ -34,6 +34,10 @@ impl Project {
                     class: "type",
                     "{p_type}"
                 }
+                p {
+                    class: "tags",
+                    "tags"
+                }
                 desc.iter().map(|desc_p| {
                     rsx! {
                         desc_p.clone().render(cx)
