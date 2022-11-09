@@ -29,7 +29,7 @@ fn app(cx: Scope) -> Element {
     let test_data = Project {
         id: "test_id".to_string(),
         name: "TestProj".to_string(),
-        tags: vec![Tags::Cli, Tags::Game],
+        tags: vec![Tags::Cli, Tags::Game, Tags::Gui],
         p_type: Type::Game {
             os: vec![OS::Windows {
                 version: vec![WinVer::Eleven],

@@ -22,6 +22,12 @@ impl Project {
         let binding = self.p_type.to_string();
         let p_type: &str = binding.as_str();
         let desc = &self.description.clone();
+        let binding = self.tags
+                                    .iter()
+                                    .map(|tag| { tag.to_string() })
+                                    .collect::<Vec<String>>()
+                                    .join(", ");
+        let tags: &str = binding.as_str();
         cx.render(rsx! {
             article {
                 class: "project",
@@ -35,8 +41,8 @@ impl Project {
                     "{p_type}"
                 }
                 p {
-                    class: "tags",
-                    "tags"
+                    class: "p_tags",
+                    "Tags: {tags}"
                 }
                 desc.iter().map(|desc_p| {
                     rsx! {
