@@ -160,9 +160,8 @@ pub fn projects(cx: Scope) -> Element {
         },
     ];
 
-    let onclick = move |id: String| {
-        router.push_route(format!("/project/{}", id).as_str(), None, None)
-    };
+    let onclick =
+        move |id: String| router.push_route(format!("/projects/{}", id).as_str(), None, None);
 
     cx.render(rsx! {
         div {

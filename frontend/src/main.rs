@@ -89,6 +89,17 @@ fn app(cx: Scope) -> Element {
                     name: "Project",
                     should_be_on_navbar: false,
                     content: cx.render(rsx! {
+                        Redirect {
+                            to: "/projects"
+                        }
+                    }),
+                    oncreate: page_oncreate
+                }
+                page::page {
+                    to: "/projects/:id",
+                    name: "Project",
+                    should_be_on_navbar: false,
+                    content: cx.render(rsx! {
                         div {
                             class: "page page-project",
                             project::project {}
