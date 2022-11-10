@@ -6,7 +6,7 @@ pub fn project(cx: Scope) -> Element {
 
     let id = match route.segment("id") {
         Some(val) => get_project(&val),
-        None => "An unknown error occured".to_string(),
+        None => "An unknown error occurred".to_string(),
     };
 
     let test_data = vec![
@@ -37,6 +37,13 @@ pub fn project(cx: Scope) -> Element {
                     desc_type: DescType::Faq,
                     is_html: true,
                     content: "<h3>Is good?</h3><p>Yes.</p>".to_string(),
+                },
+                DescriptionPart {
+                    desc_type: DescType::Configuration {
+                        c_type: ConfType::Env,
+                    },
+                    is_html: false,
+                    content: "Env".to_string(),
                 },
                 DescriptionPart {
                     desc_type: DescType::Other {

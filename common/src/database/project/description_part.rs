@@ -16,6 +16,15 @@ pub enum DescType {
     Usage,
     Installation,
     Faq,
+    Configuration { c_type: ConfType },
+    Other { title: String },
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub enum ConfType {
+    File,
+    Env,
+    Cli,
     Other { title: String },
 }
 
@@ -68,7 +77,19 @@ impl fmt::Display for DescType {
             DescType::Usage => write!(f, "Usage"),
             DescType::Installation => write!(f, "Installation"),
             DescType::Faq => write!(f, "FAQ"),
+            DescType::Configuration { c_type } => write!(f, "Configuration: {}", c_type),
             DescType::Other { title } => write!(f, "{}", title),
+        }
+    }
+}
+
+impl fmt::Display for ConfType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            ConfType::File => write!(f, "File"),
+            ConfType::Env => write!(f, "Environment Variables"),
+            ConfType::Cli => write!(f, "CLI Arguments & Options"),
+            ConfType::Other { title } => write!(f, "{}", title),
         }
     }
 }
