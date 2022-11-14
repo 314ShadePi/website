@@ -1,5 +1,5 @@
+use crate::{components::clink::CLink, traits::to_clink::ToCLink};
 use serde::{Deserialize, Serialize};
-use std::fmt;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub enum DownloadLink {
@@ -9,29 +9,36 @@ pub enum DownloadLink {
     WindowsD { link: String },
     LinuxD { link: String },
     MacD { link: String },
-    None,
 }
 
-impl DownloadLink {
-    fn get_link(&self) -> String {
+impl ToCLink for DownloadLink {
+    fn to_clink(&self) -> CLink {
         match self {
-            DownloadLink::Steam { link } => {
-                format!("https://store.steampowered.com/app/{}", link)
-            }
-            DownloadLink::GitHub { link, release } => {
+            DownloadLink::Steam { link } => CLink(
+                format!("https://store.steampowered.com/app/{}", link),
+                "Get it on Steam".to_string(),
+            ),
+            DownloadLink::GitHub { link, release } => CLink(
                 if *release == true {
                     format!("https://github.com/{}/releases", link)
                 } else {
                     format!("https://github.com/{}", link)
-                }
+                },
+                "Download from GitHub".to_string(),
+            ),
+            DownloadLink::ItchIO { subdomain, app } => CLink(
+                format!("https://{}.itch.io/{}", subdomain, app),
+                "Get it on Itch.io".to_string(),
+            ),
+            DownloadLink::WindowsD { link } => {
+                CLink(format!("{}", link), "Download for Windows".to_string())
             }
-            DownloadLink::ItchIO { subdomain, app } => {
-                format!("https://{}.itch.io/{}", subdomain, app)
+            DownloadLink::LinuxD { link } => {
+                CLink(format!("{}", link), "Download for Linux".to_string())
             }
-            DownloadLink::WindowsD { link } => format!("{}", link),
-            DownloadLink::LinuxD { link } => format!("{}", link),
-            DownloadLink::MacD { link } => format!("{}", link),
-            DownloadLink::None => format!(""),
+            DownloadLink::MacD { link } => {
+                CLink(format!("{}", link), "Download for MacOS".to_string())
+            }
         }
     }
 }

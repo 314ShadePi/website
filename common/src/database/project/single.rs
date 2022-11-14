@@ -1,3 +1,4 @@
+use super::download::DownloadLink;
 use super::tags::Tags;
 use super::{description_part::DescriptionPart, p_type::Type};
 
@@ -12,6 +13,7 @@ pub struct Project {
     pub tags: Vec<Tags>,
     pub p_type: Type,
     pub description: Vec<DescriptionPart>,
+    pub downloads: Option<Vec<DownloadLink>>,
 }
 
 impl Project {
@@ -23,11 +25,12 @@ impl Project {
         let binding = self.p_type.to_string();
         let p_type: &str = binding.as_str();
         let desc = &self.description.clone();
-        let binding = self.tags
-                                    .iter()
-                                    .map(|tag| { tag.to_string() })
-                                    .collect::<Vec<String>>()
-                                    .join(", ");
+        let binding = self
+            .tags
+            .iter()
+            .map(|tag| tag.to_string())
+            .collect::<Vec<String>>()
+            .join(", ");
         let tags: &str = binding.as_str();
         cx.render(rsx! {
             article {
@@ -61,11 +64,12 @@ impl Project {
         let name: &'static str = binding.to_static_str();
         let binding: String = self.p_type.to_string();
         let p_type: &'static str = binding.to_static_str();
-        let binding: String = self.tags
-                                    .iter()
-                                    .map(|tag| { tag.to_string() })
-                                    .collect::<Vec<String>>()
-                                    .join(", ");
+        let binding: String = self
+            .tags
+            .iter()
+            .map(|tag| tag.to_string())
+            .collect::<Vec<String>>()
+            .join(", ");
         let tags: &'static str = binding.to_static_str();
 
         cx.render(rsx! {
