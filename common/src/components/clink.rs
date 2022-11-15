@@ -12,6 +12,7 @@ impl CLink {
         cx.render(rsx! {
             Link {
                 to: "{to}",
+                new_tab: true,
                 "{text}"
             }
         })

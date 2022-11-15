@@ -9,6 +9,7 @@ pub enum DownloadLink {
     WindowsD { link: String },
     LinuxD { link: String },
     MacD { link: String },
+    None,
 }
 
 impl ToCLink for DownloadLink {
@@ -38,6 +39,9 @@ impl ToCLink for DownloadLink {
             }
             DownloadLink::MacD { link } => {
                 CLink(format!("{}", link), "Download for MacOS".to_string())
+            }
+            DownloadLink::None => {
+                CLink("".to_string(), "".to_string())
             }
         }
     }

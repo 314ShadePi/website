@@ -1,4 +1,4 @@
-use common::database::project::{description_part::*, p_type::*, single::Project, tags::*};
+use common::database::project::{description_part::*, p_type::*, single::Project, tags::*, download::DownloadLink};
 use dioxus::prelude::*;
 
 pub fn project(cx: Scope) -> Element {
@@ -67,7 +67,7 @@ pub fn project(cx: Scope) -> Element {
                     content: "Test 3".to_string(),
                 },
             ],
-            downloads: None,
+            downloads: vec![DownloadLink::Steam { link: "lol".to_string() }, DownloadLink::GitHub { link: "314ShadePi/website".to_string(), release: false }],
         },
         Project {
             id: "test_id_2".to_string(),
@@ -119,7 +119,7 @@ pub fn project(cx: Scope) -> Element {
                     content: "Test 3".to_string(),
                 },
             ],
-            downloads: None,
+            downloads: vec![DownloadLink::None],
         },
         Project {
             id: "test_id_3".to_string(),
@@ -171,7 +171,7 @@ pub fn project(cx: Scope) -> Element {
                     content: "Test 3".to_string(),
                 },
             ],
-            downloads: None,
+            downloads: vec![DownloadLink::None],
         },
     ];
 
