@@ -1,3 +1,5 @@
+use crate::traits::to_clink::ToCLink;
+
 use super::download::DownloadLink;
 use super::tags::Tags;
 use super::{description_part::DescriptionPart, p_type::Type};
@@ -13,7 +15,7 @@ pub struct Project {
     pub tags: Vec<Tags>,
     pub p_type: Type,
     pub description: Vec<DescriptionPart>,
-    pub downloads: Option<Vec<DownloadLink>>,
+    pub downloads: Vec<DownloadLink>,
 }
 
 impl Project {
@@ -44,6 +46,18 @@ impl Project {
                     class: "type",
                     "{p_type}"
                 }
+                span {
+                    class: "download-links",
+                        self.downloads.iter().map(|download| {
+                            rsx! {
+                                span {
+                                    class: "link",
+                                    download.to_clink().render(cx)
+                                    ", "
+                                }
+                            }
+                        })
+                    }
                 p {
                     class: "p_tags",
                     "Tags: {tags}"
