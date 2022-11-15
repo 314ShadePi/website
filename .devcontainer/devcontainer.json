@@ -1,0 +1,12 @@
+{
+  "name": "Website.Main",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/rust:1": {}
+  },
+  "forwardPorts": [
+    80,
+    8080,
+    12341
+  ]
+}
