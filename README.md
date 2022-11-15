@@ -1,5 +1,7 @@
 # 314ShadePi's website
 
+## *DOES NOT WORK WITH CODESPACES*
+
 ## Deploying
 
 Use `./deploy.sh` to deploy.
