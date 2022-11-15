@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
 cd ./frontend || exit
-trunk build
+mkdir ./dist
 cd ../admin-dash || exit
-trunk build
+mkdir ./dist
 
 cd ../backend || exit
 mkdir frontend

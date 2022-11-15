@@ -1,7 +1,7 @@
 cd .\frontend
-trunk build
+mkdir .\dist
 cd ..\admin-dash
-trunk build
+mkdir .\dist
 
 cd ..\backend
 mkdir frontend
