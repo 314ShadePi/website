@@ -67,7 +67,7 @@ pub fn project(cx: Scope) -> Element {
                     content: "Test 3".to_string(),
                 },
             ],
-            downloads: vec![DownloadLink::Steam { link: "lol".to_string() }, DownloadLink::GitHub { link: "314ShadePi/website".to_string(), release: false }],
+            downloads: vec![DownloadLink::Steam { app: "lol".to_string() }, DownloadLink::GitHub { repo: "314ShadePi/website".to_string(), release: false }],
         },
         Project {
             id: "test_id_2".to_string(),
