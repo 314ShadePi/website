@@ -15,20 +15,20 @@ pub enum DownloadLink {
 impl ToCLink for DownloadLink {
     fn to_clink(&self) -> CLink {
         match self {
-            DownloadLink::Steam { app: link } => CLink(
-                format!("https://store.steampowered.com/app/{}", link),
+            DownloadLink::Steam { app } => CLink(
+                format!("https://store.steampowered.com/app/{}", app),
                 "Get it on Steam".to_string(),
             ),
-            DownloadLink::GitHub { repo: link, release } => CLink(
+            DownloadLink::GitHub { repo, release } => CLink(
                 if *release == true {
-                    format!("https://github.com/{}/releases", link)
+                    format!("https://github.com/{}/releases", repo)
                 } else {
-                    format!("https://github.com/{}", link)
+                    format!("https://github.com/{}", repo)
                 },
                 "Download from GitHub".to_string(),
             ),
-            DownloadLink::ItchIO { developer: subdomain, app } => CLink(
-                format!("https://{}.itch.io/{}", subdomain, app),
+            DownloadLink::ItchIO { developer, app } => CLink(
+                format!("https://{}.itch.io/{}", developer, app),
                 "Get it on Itch.io".to_string(),
             ),
             DownloadLink::WindowsD { link } => {
