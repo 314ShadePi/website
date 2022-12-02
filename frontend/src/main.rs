@@ -3,6 +3,7 @@ mod components;
 use dioxus::prelude::*;
 
 use crate::components::pages::{
+    blog,
     core::{footer, header, page},
     project, projects,
 };
@@ -74,28 +75,6 @@ fn app(cx: Scope) -> Element {
                     oncreate: page_oncreate
                 }
                 page::page {
-                    to: "/project",
-                    name: "Project",
-                    should_be_on_navbar: false,
-                    content: cx.render(rsx! {
-                        Redirect {
-                            to: "/projects"
-                        }
-                    }),
-                    oncreate: page_oncreate
-                }
-                page::page {
-                    to: "/project/:id",
-                    name: "Project",
-                    should_be_on_navbar: false,
-                    content: cx.render(rsx! {
-                        Redirect {
-                            to: "/projects"
-                        }
-                    }),
-                    oncreate: page_oncreate
-                }
-                page::page {
                     to: "/projects/:id",
                     name: "Project",
                     should_be_on_navbar: false,
@@ -115,6 +94,40 @@ fn app(cx: Scope) -> Element {
                         div {
                             class: "page page-projects",
                             projects::projects {}
+                        }
+                    }),
+                    oncreate: page_oncreate
+                }
+                page::page {
+                    to: "/blog",
+                    name: "Blog",
+                    should_be_on_navbar: true,
+                    content: cx.render(rsx! {
+                        div {
+                            class: "page page-blog",
+                            blog::blog {}
+                        }
+                    }),
+                    oncreate: page_oncreate
+                }
+                page::page {
+                    to: "/project",
+                    name: "Project",
+                    should_be_on_navbar: false,
+                    content: cx.render(rsx! {
+                        Redirect {
+                            to: "/projects"
+                        }
+                    }),
+                    oncreate: page_oncreate
+                }
+                page::page {
+                    to: "/project/:id",
+                    name: "Project",
+                    should_be_on_navbar: false,
+                    content: cx.render(rsx! {
+                        Redirect {
+                            to: "/projects"
                         }
                     }),
                     oncreate: page_oncreate
