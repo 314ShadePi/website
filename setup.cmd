@@ -7,6 +7,6 @@ cd ..\backend
 mkdir frontend
 mkdir admin-dash
 cd frontend
-mklink /D ..\..\frontend\dist .\dist
+mklink /D .\dist ..\..\frontend\dist
 cd ../admin-dash
-mklink /D ..\..\admin-dash\dist .\dist
+mklink /D .\dist ..\..\admin-dash\dist
