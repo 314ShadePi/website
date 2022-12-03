@@ -1,11 +1,13 @@
-use common::database::project::{description_part::*, p_type::*, single::Project, tags::*, download::DownloadLink};
+use common::database::project::{
+    description_part::*, download::DownloadLink, p_type::*, single::Project, tags::*,
+};
 use dioxus::prelude::*;
 
 pub fn project(cx: Scope) -> Element {
     let route = use_route(&cx);
 
     let id = match route.segment("id") {
-        Some(val) => get_project(&val),
+        Some(val) => val.to_owned(),
         None => "An unknown error occurred".to_string(),
     };
 
@@ -67,7 +69,15 @@ pub fn project(cx: Scope) -> Element {
                     content: "Test 3".to_string(),
                 },
             ],
-            downloads: vec![DownloadLink::Steam { app: "lol".to_string() }, DownloadLink::GitHub { repo: "314ShadePi/website".to_string(), release: false }],
+            downloads: vec![
+                DownloadLink::Steam {
+                    app: "lol".to_string(),
+                },
+                DownloadLink::GitHub {
+                    repo: "314ShadePi/website".to_string(),
+                    release: false,
+                },
+            ],
         },
         Project {
             id: "test_id_2".to_string(),
@@ -189,8 +199,4 @@ pub fn project(cx: Scope) -> Element {
                 })
         }
     })
-}
-
-fn get_project(id: &str) -> String {
-    id.to_string()
 }

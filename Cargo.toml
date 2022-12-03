@@ -6,6 +6,6 @@ members = [
     "common"
 ]
 
-default-mambers = [
+default-members = [
     "backend"
 ]
