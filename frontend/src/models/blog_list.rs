@@ -4,20 +4,23 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize)]
 pub struct BlogList {
     #[serde(rename = "posts")]
-    posts: Vec<Post>,
+    pub posts: Vec<Post>,
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct Post {
     #[serde(rename = "id")]
-    id: i64,
+    pub id: i64,
 
     #[serde(rename = "title")]
-    title: String,
+    pub title: String,
+
+    #[serde(rename = "short")]
+    pub short: String,
 
     #[serde(rename = "filename")]
-    filename: String,
+    pub filename: String,
 
     #[serde(rename = "author")]
-    author: String,
+    pub author: String,
 }
