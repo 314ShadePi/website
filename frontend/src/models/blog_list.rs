@@ -10,7 +10,7 @@ pub struct BlogList {
 #[derive(Serialize, Deserialize)]
 pub struct Post {
     #[serde(rename = "id")]
-    pub id: i64,
+    pub id: String,
 
     #[serde(rename = "title")]
     pub title: String,
