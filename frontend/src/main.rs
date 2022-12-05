@@ -100,6 +100,18 @@ fn app(cx: Scope) -> Element {
                     oncreate: page_oncreate
                 }
                 page::page {
+                    to: "/blog/post/:filename",
+                    name: "Post",
+                    should_be_on_navbar: false,
+                    content: cx.render(rsx! {
+                        div {
+                            class: "page page-post",
+                            blog::post::post {}
+                        }
+                    }),
+                    oncreate: page_oncreate
+                }
+                page::page {
                     to: "/blog",
                     name: "Blog",
                     should_be_on_navbar: true,

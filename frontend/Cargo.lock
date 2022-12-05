@@ -274,6 +274,7 @@ dependencies = [
 name = "frontend"
 version = "0.1.0"
 dependencies = [
+ "c314-utils",
  "common",
  "dioxus",
  "dioxus-html-macro",

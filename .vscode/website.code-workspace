@@ -5,6 +5,6 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["bindgen"]
+		"cSpell.words": ["bindgen", "cmark", "TASKLISTS"]
 	}
 }

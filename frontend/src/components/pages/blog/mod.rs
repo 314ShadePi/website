@@ -1,10 +1,12 @@
 pub mod post;
 use crate::models::blog_list::BlogList;
+use c314_utils::prelude::ToStaticStr;
 use dioxus::prelude::*;
 use gloo::net::http::Request;
 use wasm_bindgen_futures::spawn_local;
 
 pub fn blog(cx: Scope) -> Element {
+    let router = use_router(&cx);
     let blog_list = use_ref(&cx, || BlogList { posts: vec![] });
 
     let blog_list_clone = blog_list.clone();
@@ -14,20 +16,26 @@ pub fn blog(cx: Scope) -> Element {
             .await
             .unwrap();
 
-        if resp.status() == 200 {
+        if resp.ok() {
             let blog_list = resp.json::<BlogList>().await.unwrap();
             blog_list_clone.set(blog_list);
         }
     });
+    let onclick = move |filename: String| {
+        router.push_route(format!("/blog/post/{}", filename).as_str(), None, None)
+    };
     cx.render(rsx! {
         div {
             class: "container",
             id: "blog-list",
             blog_list.read().posts.iter().map(|post| {
+                let binding: String = post.filename.clone();
+                let filename: &'static str = binding.to_static_str();
                 rsx! {
                     article {
                         class: "post",
                         id: "{post.id}",
+                        onclick: move |_| onclick(filename.to_string()),
                         h1 {
                             class: "title",
                             "{post.title}"
