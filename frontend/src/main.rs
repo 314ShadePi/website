@@ -100,7 +100,7 @@ fn app(cx: Scope) -> Element {
                     oncreate: page_oncreate
                 }
                 page::page {
-                    to: "/blog/post/:filename",
+                    to: "/blog/post/:year/:month/:day/:filename",
                     name: "Post",
                     should_be_on_navbar: false,
                     content: cx.render(rsx! {

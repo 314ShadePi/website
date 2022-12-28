@@ -23,20 +23,6 @@ services:
       - dev
     working_dir: /src/frontend
     command: trunk serve --port 8080 --address 0.0.0.0
-  admin-dash-dev:
-    build: ./dockerfiles/dev/admin-dash
-    container_name: website-admin-dash-dev
-    volumes:
-      - ./admin-dash:/src/admin-dash
-      - ./common:/src/common
-    ports:
-      - "0.0.0.0:12341:12341"
-    depends_on:
-      - backend-dev
-    profiles:
-      - dev
-    working_dir: /src/admin-dash
-    command: trunk serve --port 12341 --address 0.0.0.0
   backend-dev:
     build: ./dockerfiles/dev/backend
     container_name: website-backend-dev
@@ -76,18 +62,6 @@ services:
     profiles:
       - build
     working_dir: /src/frontend
-    command: trunk build --release
-  admin-dash-build:
-    build: ./dockerfiles/build/admin-dash
-    container_name: website-admin-dash-build
-    volumes:
-      - ./admin-dash:/src/admin-dash
-      - ./common:/src/common
-    ports:
-      - "12341:12341"
-    profiles:
-      - build
-    working_dir: /src/admin-dash
     command: trunk build --release
   backend-build:
     build: ./dockerfiles/build/backend

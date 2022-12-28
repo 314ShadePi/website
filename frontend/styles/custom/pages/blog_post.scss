@@ -1,0 +1,11 @@
+.page-post {
+	hr {
+		position: absolute;
+		right: 0;
+		width: 100%;
+	}
+
+	hr + * {
+		margin-top: 3rem;
+	}
+}

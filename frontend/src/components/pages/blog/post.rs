@@ -1,10 +1,24 @@
 use dioxus::prelude::*;
 use gloo::net::http::Request;
 use pulldown_cmark::{html, Options, Parser};
-use wasm_bindgen_futures::spawn_local;
 
 pub fn post(cx: Scope) -> Element {
     let route = use_route(&cx);
+
+    let year = match route.segment("year") {
+        Some(val) => val.to_owned(),
+        None => "An unknown error occurred".to_string(),
+    };
+
+    let month = match route.segment("month") {
+        Some(val) => val.to_owned(),
+        None => "An unknown error occurred".to_string(),
+    };
+
+    let day = match route.segment("day") {
+        Some(val) => val.to_owned(),
+        None => "An unknown error occurred".to_string(),
+    };
 
     let filename = match route.segment("filename") {
         Some(val) => val.to_owned(),
@@ -12,18 +26,29 @@ pub fn post(cx: Scope) -> Element {
     };
 
     let post = use_ref(&cx, || String::from(""));
+    let first_run = use_state(&cx, || true);
 
-    let post_clone = post.clone();
-    spawn_local(async move {
-        let resp = Request::get(format!("https://raw.githubusercontent.com/314ShadePi/314shadepi-website-static/main/blog/{}", filename).as_str())
-            .send()
-            .await
-            .unwrap();
+    cx.spawn(
+        {
+            let post_c = post.clone();
+            let first_run = first_run.clone();
 
-        if resp.ok() {
-            let post = resp.text().await.unwrap();
-            post_clone.set(post);
-        }
+            async move {
+                if first_run == false {
+                    return;
+                }
+                first_run.set(false);
+
+                let resp = Request::get(format!("https://raw.githubusercontent.com/314ShadePi/314shadepi-website-static/main/blog/{}/{}/{}/{}", year, month, day, filename).as_str())
+                    .send()
+                    .await
+                    .unwrap();
+
+                if resp.ok() {
+                    let post = resp.text().await.unwrap();
+                    post_c.set(post);
+                }
+            }
     });
 
     let post = post.read();

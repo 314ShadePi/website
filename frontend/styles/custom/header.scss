@@ -149,7 +149,7 @@ header {
 	}
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1201px) {
 	.container .row.align-items-center.justify-content-between .logo {
 		.navbar-logo.small {
 			display: none;
@@ -157,7 +157,7 @@ header {
 	}
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1200px) {
 	.container .row.align-items-center.justify-content-between .logo {
 		.navbar-logo.big {
 			display: none;

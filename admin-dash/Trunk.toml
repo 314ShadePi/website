@@ -1,9 +1,0 @@
-[build]
-filehash = false
-public_url = "/admin/"
-
-[watch]
-watch = ["./", "../common"]
-
-[serve]
-watch = ["./", "../common"]

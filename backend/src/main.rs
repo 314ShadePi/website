@@ -39,15 +39,6 @@ async fn main() -> std::io::Result<()> {
                     .route("/hey", web::get().to(manual_hello)),
             )
             .service(
-                scope("/admin").service(
-                    spa()
-                        .index_file("./admin-dash/dist/index.html")
-                        .static_resources_location("./admin-dash/dist")
-                        .static_resources_mount("/")
-                        .finish(),
-                ),
-            )
-            .service(
                 spa()
                     .index_file("./frontend/dist/index.html")
                     .static_resources_mount("/")
