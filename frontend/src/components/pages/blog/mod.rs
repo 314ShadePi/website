@@ -8,17 +8,18 @@ use wasm_bindgen_futures::spawn_local;
 pub fn blog(cx: Scope) -> Element {
     let router = use_router(&cx);
     let blog_list = use_ref(&cx, || BlogList { posts: vec![] });
+    cx.spawn({
+        let blog_list_c = blog_list.clone();
+        async move {
+            let resp = Request::get("https://raw.githubusercontent.com/314ShadePi/314shadepi-website-static/main/blog/index.json")
+                .send()
+                .await
+                .unwrap();
 
-    let blog_list_clone = blog_list.clone();
-    spawn_local(async move {
-        let resp = Request::get("https://raw.githubusercontent.com/314ShadePi/314shadepi-website-static/main/blog/index.json")
-            .send()
-            .await
-            .unwrap();
-
-        if resp.ok() {
-            let blog_list = resp.json::<BlogList>().await.unwrap();
-            blog_list_clone.set(blog_list);
+            if resp.ok() {
+                let blog_list = resp.json::<BlogList>().await.unwrap();
+                blog_list_c.set(blog_list);
+            }
         }
     });
     let onclick = move |filename: String| {
