@@ -13,7 +13,7 @@ pub fn footer(cx: Scope) -> Element {
                     span {
                         class: "inner",
                         p {
-                            "© 2022 314ShadePi"
+                            "© 2023 314ShadePi"
                         }
                     }
                 }
