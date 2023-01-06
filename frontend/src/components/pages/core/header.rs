@@ -58,7 +58,7 @@ pub fn header(cx: Scope<HeaderProps>) -> Element {
                                         }
                                     }
                                 })
-                                li { class: "display", Link { to: "https://github.com/314ShadePi/website", external: true, new_tab: true, "Github" }}
+                                li { class: "display", Link { to: "https://github.com/314ShadePi", external: true, new_tab: true, "Github" }}
                             }
                         }
                     }
