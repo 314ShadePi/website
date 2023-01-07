@@ -3,14 +3,20 @@ use crate::models::blog_list::BlogList;
 use c314_utils::prelude::ToStaticStr;
 use dioxus::prelude::*;
 use gloo::net::http::Request;
-use wasm_bindgen_futures::spawn_local;
 
 pub fn blog(cx: Scope) -> Element {
     let router = use_router(&cx);
     let blog_list = use_ref(&cx, || BlogList { posts: vec![] });
+    let first_run = use_state(&cx, || true);
     cx.spawn({
         let blog_list_c = blog_list.clone();
+        let first_run = first_run.clone();
         async move {
+            if first_run == false {
+                return;
+            }
+            first_run.set(false);
+
             let resp = Request::get("https://raw.githubusercontent.com/314ShadePi/314shadepi-website-static/main/blog/index.json")
                 .send()
                 .await
