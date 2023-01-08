@@ -146,6 +146,23 @@ fn app(cx: Scope) -> Element {
                     }),
                     oncreate: page_oncreate
                 }
+                page::page {
+                    to: "",
+                    name: "404",
+                    should_be_on_navbar: false,
+                    content: cx.render({
+                        rsx! {
+                            div {
+                                class: "page page-not-found",
+                                h1 {
+                                    class: "title",
+                                    "404 - Not Found"
+                                }
+                            }
+                        }
+                    }),
+                    oncreate: page_oncreate
+                }
                 div {
                     id: "space-bottom"
                 }
