@@ -1,5 +1,0 @@
-[watch]
-watch = ["./", "../common"]
-
-[serve]
-watch = ["./", "../common"]

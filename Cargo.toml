@@ -1,24 +1,18 @@
-[workspace]
-members = [
-    "backend",
-    "frontend",
-    "common"
-]
+[package]
+name = "website"
+version = "0.1.0"
+edition = "2021"
 
-default-members = [
-    "backend"
-]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[profile.release]
-opt-level = 2 # fast and small wasm
-
-
-[patch.crates-io]
-
-# If you want to use the bleeding edge version of egui and eframe:
-# egui = { git = "https://github.com/emilk/egui", branch = "master" }
-# eframe = { git = "https://github.com/emilk/egui", branch = "master" }
-
-# If you fork https://github.com/emilk/egui you can test with:
-# egui = { path = "../egui/crates/egui" }
-# eframe = { path = "../egui/crates/eframe" }
+[dependencies]
+c314-utils = "0.2.0"
+dioxus = { version = "0.2.4", features = ["web", "router"] }
+dioxus-html-macro = "0.2.0"
+futures = "0.3.25"
+gloo = "0.8.0"
+pulldown-cmark = "0.9.2"
+serde = { version = "1.0.148", features = ["derive"] }
+serde_json = "1.0.89"
+wasm-bindgen-futures = "0.4.33"
+web-sys = "0.3.60"
