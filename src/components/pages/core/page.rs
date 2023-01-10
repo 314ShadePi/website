@@ -12,8 +12,8 @@ pub struct PageProps<'a> {
     to: &'static str,
     name: &'static str,
     should_be_on_navbar: bool,
-    content: Element<'a>,
     oncreate: EventHandler<'a, Page>,
+    children: Element<'a>,
 }
 
 pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
@@ -27,7 +27,7 @@ pub fn page<'a>(cx: Scope<'a, PageProps<'a>>) -> Element {
         Route {
             to: "{cx.props.to}",
             main {
-                &cx.props.content
+                &cx.props.children
             }
         }
     })
