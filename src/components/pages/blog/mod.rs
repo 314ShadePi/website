@@ -9,6 +9,8 @@ pub fn blog(cx: Scope) -> Element {
     let router = use_router(&cx);
     let blog_list = use_ref(&cx, || BlogList { posts: vec![] });
     let first_run = use_state(&cx, || true);
+    let document = gloo::utils::document();
+    document.set_title("314ShadePi - Blog");
     cx.spawn({
         let blog_list_c = blog_list.clone();
         let first_run = first_run.clone();
@@ -44,7 +46,7 @@ pub fn blog(cx: Scope) -> Element {
                         class: "post",
                         id: "{post.id}",
                         onclick: move |_| onclick(filename.to_string()),
-                        h1 {
+                        h2 {
                             class: "title",
                             "{post.title}"
                         }

@@ -4,6 +4,8 @@ use crate::models::project::{
 use dioxus::prelude::*;
 
 pub fn projects(cx: Scope) -> Element {
+    let document = gloo::utils::document();
+    document.set_title("314ShadePi - Projects");
     let router = use_router(&cx);
 
     let test_data = vec![
