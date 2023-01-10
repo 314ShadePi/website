@@ -7,7 +7,7 @@ use dioxus::prelude::*;
 use crate::components::pages::{
     blog,
     core::{footer, header, page},
-    project, projects,
+    project, projects, about, home,
 };
 
 fn main() {
@@ -42,9 +42,7 @@ fn app(cx: Scope) -> Element {
                     oncreate: page_oncreate,
                     div {
                         class: "page page-home",
-                        p { "Home" }
-                        Link { to: "/about", "About" }
-                        p { "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }
+                        home::home {}
                     }
                 }
                 page::page {
@@ -54,8 +52,7 @@ fn app(cx: Scope) -> Element {
                     oncreate: page_oncreate,
                     div {
                         class: "page page-about",
-                        p { "About" }
-                        Link { to: "/", "Home" }
+                        about::about {}
                     }
                 }
                 page::page {
@@ -75,6 +72,10 @@ fn app(cx: Scope) -> Element {
                     oncreate: page_oncreate,
                     div {
                         class: "page page-projects",
+                        h1 {
+                            class: "title",
+                            "314ShadePi's Projects:"
+                        }
                         projects::projects {}
                     }
                 }
