@@ -1,6 +1,0 @@
-[submodule "styles/bulma"]
-	path = styles/bulma
-	url = https://github.com/jgthms/bulma.git
-[submodule "styles/crucial.css"]
-	path = styles/crucial.css
-	url = https://github.com/314ShadePi/crucial.css.git
