@@ -44,7 +44,7 @@ pub fn blog(cx: Scope) -> Element {
                         class: "post",
                         id: "{post.id}",
                         onclick: move |_| onclick(filename.to_string()),
-                        h1 {
+                        h2 {
                             class: "title",
                             "{post.title}"
                         }

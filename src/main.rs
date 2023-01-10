@@ -95,6 +95,10 @@ fn app(cx: Scope) -> Element {
                     oncreate: page_oncreate,
                     div {
                         class: "page page-blog",
+                        h1 {
+                            class: "title",
+                            "314ShadePi's Blog:"
+                        }
                         blog::blog {}
                     }
                 }
